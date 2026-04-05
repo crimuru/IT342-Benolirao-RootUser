@@ -1,0 +1,169 @@
+/* Page Setup */
+.book-appointment-page {
+  padding: 40px 60px;
+}
+
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 1.8rem;
+  color: #111;
+  margin: 0 0 5px 0;
+}
+
+.page-header p {
+  color: #666;
+  margin: 0;
+}
+
+/* Form Layout */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.booking-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* Card Styling */
+.booking-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f0f7f7;
+}
+
+.booking-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #111;
+  font-weight: 600;
+}
+
+.header-icon {
+  color: #1a9c92; /* Teal matching your UI */
+}
+
+/* Date Input Customization */
+.date-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0 16px;
+  background-color: #fafbfc;
+  transition: border-color 0.2s ease;
+}
+
+.date-input-wrapper:focus-within {
+  border-color: #1a9c92;
+  background-color: #ffffff;
+}
+
+.date-input-wrapper input[type="date"] {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 14px 0;
+  font-size: 0.95rem;
+  color: #333;
+  outline: none;
+  font-family: inherit;
+}
+
+/* Time Slot Grid */
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.time-slot-btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-slot-btn:hover {
+  border-color: #1a9c92;
+  color: #1a9c92;
+  background-color: #f0fdfc;
+}
+
+/* When a user clicks a time slot */
+.time-slot-btn.selected {
+  background-color: #1a9c92;
+  border-color: #1a9c92;
+  color: white;
+}
+
+/* Textarea Customization */
+textarea {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 0.95rem;
+  color: #333;
+  background-color: #fafbfc;
+  outline: none;
+  resize: vertical; /* Allows user to pull it down slightly */
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
+}
+
+textarea:focus {
+  border-color: #1a9c92;
+  background-color: #ffffff;
+}
+
+/* Confirm Button */
+.btn-confirm {
+  background-color: #1a9c92;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-confirm:hover:not(:disabled) {
+  background-color: #16867e;
+}
+
+.btn-confirm:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
