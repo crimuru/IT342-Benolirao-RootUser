@@ -255,3 +255,66 @@
     text-decoration: none;
     font-weight: 500;
 }
+
+/* Custom Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999 !important; /* Force to top */
+  backdrop-filter: blur(8px);
+  /* This ensures the overlay doesn't "swallow" the click */
+  pointer-events: all; 
+}
+
+/* Modal Card */
+.modal-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  /* Higher than overlay */
+  z-index: 100000 !important; 
+  /* Force it to be clickable */
+  pointer-events: auto !important; 
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.btn-no, .btn-yes {
+  flex: 1;
+  padding: 14px; /* Slightly larger for easier clicking */
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer !important;
+  /* Ensures no other layer blocks the button */
+  position: relative;
+  z-index: 100001 !important; 
+  pointer-events: auto !important;
+}
+
+.btn-yes {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+}
+
+.btn-no {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}

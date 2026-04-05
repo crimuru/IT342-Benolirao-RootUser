@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Mail, Phone, Save, CheckCircle2, Loader2 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import '../styles/Profile.css';
 
 const Profile = () => {
-  // 1. Initial State (Updated for PH format)
+  // 1. Initialize state with empty strings (ready for API data)
   const [profileData, setProfileData] = useState({
-    fullName: 'Clyde Benolirao',
-    email: 'clyde@example.com',
-    phone: '+63 912 345 6789', // Philippine format
-    memberSince: 'January 2024'
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    memberSince: ''
   });
 
-  // 2. UI Feedback States
+  const [loading, setLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // Handle input typing
+  // 🔌 2. Fetch real user data on load
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Using ID 1 for testing - adjust based on your logged-in user logic
+        const response = await fetch("http://localhost:8080/api/users/1");
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data);
+        }
+      } catch (error) {
+        console.error("Error loading profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfileData(prev => ({
@@ -25,26 +45,43 @@ const Profile = () => {
     }));
   };
 
-  // 3. Simulated "Save" Function
-  const handleSave = (e) => {
+  // 💾 3. Live Save logic (PUT request to Spring Boot)
+  const handleSave = async (e) => {
     e.preventDefault();
     setIsSaving(true);
     setShowSuccess(false);
 
-    // Simulate sending data to your Spring Boot Backend (takes 1 second)
-    setTimeout(() => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/users/1`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(profileData),
+      });
+
+      if (response.ok) {
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
+      } else {
+        alert("Failed to update profile.");
+      }
+    } catch (error) {
+      console.error("Error saving profile:", error);
+    } finally {
       setIsSaving(false);
-      setShowSuccess(true); // Show the success checkmark
-      
-      // Hide the success message after 3 seconds
-      setTimeout(() => setShowSuccess(false), 3000);
-    }, 1000);
+    }
   };
 
-  // Helper to get initials (e.g., "Clyde Benolirao" -> "CB")
-  const getInitials = (name) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+  const getInitials = (first, last) => {
+    if (!first || !last) return "U";
+    return `${first.charAt(0)}${last.charAt(0)}`.toUpperCase();
   };
+
+  if (loading) return (
+    <div className="dashboard-layout">
+      <Sidebar />
+      <main className="dashboard-content"><p>Loading profile...</p></main>
+    </div>
+  );
 
   return (
     <div className="dashboard-layout">
@@ -59,32 +96,49 @@ const Profile = () => {
         </header>
 
         <div className="profile-grid">
-          {/* Left Card: Summary */}
           <div className="profile-summary-card">
             <div className="avatar-circle">
-              {getInitials(profileData.fullName)}
+              {getInitials(profileData.firstName, profileData.lastName)}
             </div>
-            <h2 className="profile-name">{profileData.fullName}</h2>
+            <h2 className="profile-name">{profileData.firstName} {profileData.lastName}</h2>
             <p className="profile-email">{profileData.email}</p>
-            <p className="profile-date">Member since {profileData.memberSince}</p>
+            {/* Logic: Only show date if it exists in DB */}
+            <p className="profile-date">
+                Member since {profileData.memberSince || '2026'}
+            </p>
           </div>
 
-          {/* Right Card: Edit Form */}
           <div className="profile-edit-card">
             <h3 className="card-title">Personal Information</h3>
             
             <form className="profile-form" onSubmit={handleSave}>
-              <div className="form-group">
-                <label>Full Name</label>
-                <div className="input-wrapper">
-                  <User className="input-icon" size={18} />
-                  <input 
-                    type="text" 
-                    name="fullName"
-                    value={profileData.fullName}
-                    onChange={handleChange}
-                    required
-                  />
+              <div className="form-row" style={{ display: 'flex', gap: '20px' }}>
+                <div className="form-group" style={{ flex: 1 }}>
+                  <label>First Name</label>
+                  <div className="input-wrapper">
+                    <User className="input-icon" size={18} />
+                    <input 
+                      type="text" 
+                      name="firstName"
+                      value={profileData.firstName || ''}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ flex: 1 }}>
+                  <label>Last Name</label>
+                  <div className="input-wrapper">
+                    <User className="input-icon" size={18} />
+                    <input 
+                      type="text" 
+                      name="lastName"
+                      value={profileData.lastName || ''}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -95,7 +149,7 @@ const Profile = () => {
                   <input 
                     type="email" 
                     name="email"
-                    value={profileData.email}
+                    value={profileData.email || ''}
                     onChange={handleChange}
                     required
                   />
@@ -109,15 +163,13 @@ const Profile = () => {
                   <input 
                     type="tel" 
                     name="phone"
-                    value={profileData.phone}
+                    value={profileData.phone || ''}
                     onChange={handleChange}
                     placeholder="+63 9XX XXX XXXX"
-                    required
                   />
                 </div>
               </div>
 
-              {/* Action Area with Feedback */}
               <div className="form-actions">
                 <button type="submit" className="btn-save" disabled={isSaving}>
                   {isSaving ? (
@@ -127,7 +179,6 @@ const Profile = () => {
                   )}
                 </button>
 
-                {/* Success Message that appears after saving */}
                 {showSuccess && (
                   <span className="success-msg">
                     <CheckCircle2 size={18} /> 

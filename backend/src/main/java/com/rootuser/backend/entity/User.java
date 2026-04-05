@@ -27,4 +27,7 @@ public class User {
     // Stores the BCrypt hashed password
     @Column(nullable = false)
     private String password;
+
+    @Column(name = "phone")
+    private String phone;
 }
