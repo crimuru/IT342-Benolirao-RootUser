@@ -8,15 +8,21 @@ import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [appointments, setAppointments] = useState([]);
-  const [user, setUser] = useState({ fullName: "Clyde Benolirao" });
+  const [user, setUser] = useState({ id: 1, fullName: "Clyde Benolirao" });
   const [loading, setLoading] = useState(true);
 
   // Modal States
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
-  // 🚀 NEW: Real-time Greeting Logic
+  // 🚀 REFACTORED: We now rely entirely on the backend Facade for this data!
+  const [dashboardData, setDashboardData] = useState({
+    upcomingCount: 0,
+    completedCount: 0,
+    totalVisits: 0,
+    upcomingAppointments: []
+  });
+
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good morning";
@@ -30,10 +36,12 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/appointments");
+      // 🚀 REFACTORED: One clean API call to the Facade endpoint
+      const response = await fetch(`http://localhost:8080/api/dashboard/${user.id}`);
       if (response.ok) {
         const data = await response.json();
-        setAppointments(data);
+        // The backend did all the math, we just save it directly to state!
+        setDashboardData(data);
       }
     } catch (error) {
       console.error("Error connecting to server:", error);
@@ -64,13 +72,11 @@ const Dashboard = () => {
     }
   };
 
-  const upcoming = appointments.filter(a => a.status === "confirmed" || a.status === "pending");
-  const completedCount = appointments.filter(a => a.status === "completed").length;
-
+  // 🚀 REFACTORED: Stats are pulled straight from the Facade data payload
   const stats = [
-    { label: "Upcoming", value: upcoming.length, icon: CalendarDays, color: "text-teal", bg: "bg-teal-light" },
-    { label: "Completed", value: completedCount, icon: TrendingUp, color: "text-green", bg: "bg-green-light" },
-    { label: "Total Visits", value: appointments.length, icon: Clock, color: "text-amber", bg: "bg-amber-light" },
+    { label: "Upcoming", value: dashboardData.upcomingCount || 0, icon: CalendarDays, color: "text-teal", bg: "bg-teal-light" },
+    { label: "Completed", value: dashboardData.completedCount || 0, icon: TrendingUp, color: "text-green", bg: "bg-green-light" },
+    { label: "Total Visits", value: dashboardData.totalVisits || 0, icon: Clock, color: "text-amber", bg: "bg-amber-light" },
   ];
 
   return (
@@ -116,7 +122,6 @@ const Dashboard = () => {
       <main className="dashboard-content">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="content-header">
           <div className="welcome-section">
-            {/* 🚀 UPDATED: Dynamic Greeting and First Name extraction */}
             <h1>{getGreeting()}, {user.fullName ? user.fullName.split(" ")[0] : "User"}! 👋</h1>
             <p>Here's an overview of your dental appointments.</p>
           </div>
@@ -139,8 +144,8 @@ const Dashboard = () => {
           <div className="appointment-list">
             {loading ? (
               <p className="empty-msg">Loading appointments...</p>
-            ) : upcoming.length > 0 ? (
-              upcoming.map((apt) => (
+            ) : dashboardData.upcomingAppointments && dashboardData.upcomingAppointments.length > 0 ? (
+              dashboardData.upcomingAppointments.map((apt) => (
                 <div key={apt.id} className="appointment-item">
                   <div className="item-left">
                     <div className="date-badge">

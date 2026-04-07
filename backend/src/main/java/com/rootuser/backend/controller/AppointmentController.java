@@ -21,9 +21,19 @@ public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+
+    // 👑 1. ADMIN ENDPOINT: Gets EVERY appointment in the database
     @GetMapping
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
+    }
+
+    // 👤 2. USER ENDPOINT: Gets ONLY the appointments for a specific user
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Appointment>> getUserAppointments(@PathVariable Long userId) {
+        // We use the custom repository method we made earlier!
+        List<Appointment> userAppointments = appointmentRepository.findByUser_Id(userId);
+        return ResponseEntity.ok(userAppointments);
     }
 
     @PostMapping
@@ -41,4 +51,6 @@ public class AppointmentController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    
 }

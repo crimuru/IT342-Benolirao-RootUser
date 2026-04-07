@@ -31,4 +31,10 @@ public class UserService {
             .map(user -> passwordEncoder.matches(rawPassword, user.getPassword()))
             .orElse(false);
     }
+
+    
+    public User findByEmail(String email) {
+        // 🚀 Add .orElse(null) to unpack the Optional!
+        return userRepository.findByEmail(email).orElse(null);
+    }
 }

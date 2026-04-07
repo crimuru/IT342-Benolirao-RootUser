@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     List<Appointment> findByStatus(String status);
+    // 🚀 ADD THIS LINE: Tells Spring Boot how to find appointments for a specific user
+    List<Appointment> findByUser_Id(Long userId);
 }

@@ -30,7 +30,6 @@ const BookAppointment = () => {
     setBookingData(prev => ({ ...prev, time: selectedTime }));
   };
 
-  // 🚀 REAL API CONNECTION HERE
   const handleConfirm = async (e) => {
     e.preventDefault();
     
@@ -39,24 +38,36 @@ const BookAppointment = () => {
       return;
     }
 
+    // 🚀 1. READ THE LOGGED-IN USER FROM LOCAL STORAGE
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      alert("You must be logged in to book an appointment!");
+      return;
+    }
+    const loggedInUser = JSON.parse(userString);
+
     setIsSubmitting(true);
     setShowSuccess(false);
 
+    // 🚀 2. USE THE DYNAMIC ID FOR THE DATABASE
+    const payload = {
+      date: bookingData.date,
+      time: bookingData.time,
+      concern: bookingData.concern,
+      user: { id: loggedInUser.id } // This now dynamically changes based on who is logged in!
+    };
+
     try {
-      // Sending data to your Spring Boot Backend
       const response = await fetch("http://localhost:8080/api/appointments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(bookingData), // Sends date, time, and concern
+        body: JSON.stringify(payload), 
       });
 
       if (response.ok) {
-        // If Spring Boot saves it successfully
         setShowSuccess(true);
-        
-        // Reset the form after 3 seconds
         setTimeout(() => {
           setShowSuccess(false);
           setBookingData({ date: '', time: '', concern: '' });

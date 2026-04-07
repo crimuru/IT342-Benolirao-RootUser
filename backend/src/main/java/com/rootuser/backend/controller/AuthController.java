@@ -33,8 +33,10 @@ public class AuthController {
         boolean isValid = userService.validateUser(loginRequest.getEmail(), loginRequest.getPassword());
         
         if (isValid) {
-            // Requirement: Allow successful login to access system
-            return ResponseEntity.ok("Login successful");
+            // 🚀 THE FIX: Fetch the actual User from the database and return it!
+            // (Note: If findByEmail gives a red error, you just need to add it to your UserService!)
+            User loggedInUser = userService.findByEmail(loginRequest.getEmail());
+            return ResponseEntity.ok(loggedInUser); 
         } else {
             // Requirement: Prevent login with invalid credentials
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");

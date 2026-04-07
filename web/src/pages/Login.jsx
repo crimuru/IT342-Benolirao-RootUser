@@ -12,16 +12,20 @@ const Login = () => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8080/api/auth/login', loginData);
       
       if (response.status === 200) {
+        // 🚀 THE FIX: Save the User object Spring Boot just sent us into the "VIP Badge"
+        localStorage.setItem("user", JSON.stringify(response.data));
+        
         alert("Login Successful!");
         navigate('/dashboard'); 
       }
     } catch (error) {
+      // If the backend sends a string error message, it will show up here
       alert(error.response?.data || "Invalid email or password.");
     }
   };
