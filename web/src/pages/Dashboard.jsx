@@ -135,7 +135,7 @@ const Dashboard = () => {
       <main className="dashboard-content">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="content-header">
           <div className="welcome-section">
-            <h1>{getGreeting()}, {user ? ((user.fullName || `${user.firstName || ''} ${user.lastName || ''}`).split(" ")[0]) : "User"}! 👋</h1>
+            <h1>{getGreeting()}, {user ? ((user.fullName || `${user.firstName || ''} ${user.lastName || ''}`).split(" ")[0]) : "User"}!</h1>
             <p>Here's an overview of your dental appointments.</p>
           </div>
           <button className="btn-book" onClick={() => navigate('/book')}>
