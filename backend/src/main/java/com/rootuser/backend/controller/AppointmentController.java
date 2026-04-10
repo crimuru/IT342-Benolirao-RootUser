@@ -2,6 +2,7 @@ package com.rootuser.backend.controller;
 
 import com.rootuser.backend.entity.Appointment;
 import com.rootuser.backend.repository.AppointmentRepository;
+import com.rootuser.backend.repository.AvailableSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private AvailableSlotRepository availableSlotRepository;
+
 
     // 👑 1. ADMIN ENDPOINT: Gets EVERY appointment in the database
     @GetMapping
@@ -38,6 +42,11 @@ public class AppointmentController {
 
     @PostMapping
     public ResponseEntity<Appointment> bookAppointment(@RequestBody Appointment appointment) {
+        availableSlotRepository.findByDateAndTime(appointment.getDate(), appointment.getTime())
+            .ifPresent(slot -> {
+                slot.setBooked(true);
+                availableSlotRepository.save(slot);
+            });
         Appointment savedAppointment = appointmentRepository.save(appointment);
         return ResponseEntity.ok(savedAppointment);
     }
@@ -47,6 +56,11 @@ public class AppointmentController {
         return appointmentRepository.findById(id)
                 .map(appointment -> {
                     appointment.setStatus("cancelled");
+                    availableSlotRepository.findByDateAndTime(appointment.getDate(), appointment.getTime())
+                        .ifPresent(slot -> {
+                            slot.setBooked(false);
+                            availableSlotRepository.save(slot);
+                        });
                     return ResponseEntity.ok(appointmentRepository.save(appointment));
                 })
                 .orElse(ResponseEntity.notFound().build());

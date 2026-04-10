@@ -30,4 +30,7 @@ public class User {
 
     @Column(name = "phone")
     private String phone;
+    
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'USER'")
+    private String role = "USER";
 }

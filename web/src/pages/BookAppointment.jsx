@@ -23,13 +23,24 @@ const BookAppointment = () => {
     'Dental Checkup'
   ];
 
-  const timeSlots = [
-    '09:00 AM', '09:30 AM', '10:00 AM',
-    '10:30 AM', '11:00 AM', '11:30 AM',
-    '01:00 PM', '01:30 PM', '02:00 PM',
-    '02:30 PM', '03:00 PM', '03:30 PM',
-    '04:00 PM', '04:30 PM'
-  ];
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+
+  React.useEffect(() => {
+    if (bookingData.date) {
+      setLoadingSlots(true);
+      fetch(`http://localhost:8080/api/slots/available?date=${bookingData.date}`)
+        .then(res => res.json())
+        .then(data => {
+            data.sort((a, b) => a.time.localeCompare(b.time));
+            setAvailableSlots(data);
+        })
+        .catch(err => console.error("Error fetching slots", err))
+        .finally(() => setLoadingSlots(false));
+    } else {
+      setAvailableSlots([]);
+    }
+  }, [bookingData.date]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -162,23 +173,34 @@ const BookAppointment = () => {
               <div className="slot-placeholder">
                 <p>Please select a date first to view available appointment times.</p>
               </div>
+            ) : loadingSlots ? (
+              <div className="slot-placeholder">
+                <p>Loading available slots...</p>
+              </div>
+            ) : availableSlots.length === 0 ? (
+              <div className="slot-placeholder">
+                <p style={{ color: '#ef4444' }}>No available slots on this date. Please select another date.</p>
+              </div>
             ) : (
               <>
                 <div className="slot-meta">
-                  <span>{`${timeSlots.length} slots available on ${new Date(bookingData.date).toLocaleDateString('en-US')}`}</span>
-                  {bookingData.time && <span>Selected: {bookingData.time}</span>}
+                  <span>{`${availableSlots.length} slots available on ${new Date(bookingData.date).toLocaleDateString('en-US')}`}</span>
+                  {bookingData.time && <span>Selected: {new Date(`1970-01-01T${bookingData.time}:00Z`).toLocaleTimeString('en-US', {timeZone:'UTC',hour12:true,hour:'numeric',minute:'2-digit'})}</span>}
                 </div>
                 <div className="time-grid">
-                  {timeSlots.map((slot) => (
-                    <button
-                      key={slot}
-                      type="button"
-                      className={`time-slot-btn ${bookingData.time === slot ? 'selected' : ''}`}
-                      onClick={() => handleTimeSelect(slot)}
-                    >
-                      {slot}
-                    </button>
-                  ))}
+                  {availableSlots.map((slot) => {
+                    const displayTime = new Date(`1970-01-01T${slot.time}:00Z`).toLocaleTimeString('en-US', {timeZone:'UTC',hour12:true,hour:'numeric',minute:'2-digit'});
+                    return (
+                      <button
+                        key={slot.id}
+                        type="button"
+                        className={`time-slot-btn ${bookingData.time === slot.time ? 'selected' : ''}`}
+                        onClick={() => handleTimeSelect(slot.time)}
+                      >
+                        {displayTime}
+                      </button>
+                    );
+                  })}
                 </div>
               </>
             )}

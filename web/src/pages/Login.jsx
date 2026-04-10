@@ -23,11 +23,16 @@ const Login = () => {
           firstName: response.data.firstName,
           lastName: response.data.lastName,
           email: response.data.email,
+          role: response.data.role,
         };
         localStorage.setItem("user", JSON.stringify(loggedInUser));
         
         alert("Login Successful!");
-        navigate('/dashboard'); 
+        if (response.data.role === 'ADMIN') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/dashboard'); 
+        }
       }
     } catch (error) {
       // If the backend sends a string error message, it will show up here

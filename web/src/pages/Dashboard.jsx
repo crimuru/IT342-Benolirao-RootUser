@@ -153,7 +153,7 @@ const Dashboard = () => {
         </div>
 
         <motion.div className="appointments-container">
-          <h2>Upcoming Appointments</h2>
+          <h2>Your Appointments</h2>
           <div className="appointment-list">
             {loading ? (
               <p className="empty-msg">Loading appointments...</p>
@@ -173,19 +173,21 @@ const Dashboard = () => {
                   
                   <div className="item-right" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                     <StatusBadge status={apt.status} />
-                    <button 
-                      className="btn-cancel-link"
-                      onClick={() => openCancelModal(apt.id)}
-                      title="Cancel Appointment"
-                      style={{ background: 'none', border: 'none', color: '#ff4d4d', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-                    >
-                      <XCircle size={20} />
-                    </button>
+                    {apt.status !== 'cancelled' && (
+                      <button 
+                        className="btn-cancel-link"
+                        onClick={() => openCancelModal(apt.id)}
+                        title="Cancel Appointment"
+                        style={{ background: 'none', border: 'none', color: '#ff4d4d', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                      >
+                        <XCircle size={20} />
+                      </button>
+                    )}
                   </div>
                 </div>
               ))
             ) : (
-              <p className="empty-msg">No upcoming appointments found.</p>
+              <p className="empty-msg">No appointments found.</p>
             )}
           </div>
         </motion.div>

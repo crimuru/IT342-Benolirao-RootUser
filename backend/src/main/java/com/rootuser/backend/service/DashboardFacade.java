@@ -21,7 +21,7 @@ public class DashboardFacade {
         
         // 1. Grab the actual list of upcoming appointments
         List<Appointment> upcomingList = all.stream()
-            .filter(a -> a.getStatus().equals("pending") || a.getStatus().equals("confirmed"))
+            .filter(a -> a.getStatus().equals("pending") || a.getStatus().equals("confirmed") || a.getStatus().equals("approved") || a.getStatus().equals("cancelled"))
             .collect(Collectors.toList());
 
         // 2. Count the completed ones

@@ -7,6 +7,17 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import BookAppointment from './pages/BookAppointment';
 import AppointmentHistory from './pages/AppointmentHistory';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminUsers from './pages/AdminUsers';
+import AdminAppointments from './pages/AdminAppointments';
+import AdminSlots from './pages/AdminSlots';
+
+const AdminRoute = ({ children }) => {
+  const userString = localStorage.getItem('user');
+  if (!userString) return <Navigate to="/login" />;
+  const user = JSON.parse(userString);
+  return user.role === 'ADMIN' ? children : <Navigate to="/dashboard" />;
+};
 
 function App() {
   return (
@@ -25,6 +36,13 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/book" element={<BookAppointment />} />
         <Route path="/history" element={<AppointmentHistory />} />
+        
+        {/* Admin Routes */}
+        <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+        <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
+        <Route path="/admin/appointments" element={<AdminRoute><AdminAppointments /></AdminRoute>} />
+        <Route path="/admin/slots" element={<AdminRoute><AdminSlots /></AdminRoute>} />
+        
         {/* Catch-all: Redirect unknown routes back to Landing */}
         <Route path="*" element={<Navigate to="/" />} />
 
