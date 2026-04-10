@@ -4,8 +4,9 @@ import Landing from './pages/Landing';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile'; // <-- 1. Import your new Profile page
+import Profile from './pages/Profile';
 import BookAppointment from './pages/BookAppointment';
+import AppointmentHistory from './pages/AppointmentHistory';
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
         
         {/* Protected/System Access Routes */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} /> {/* <-- 2. Add the Profile route */}
-       <Route path="/book" element={<BookAppointment />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/book" element={<BookAppointment />} />
+        <Route path="/history" element={<AppointmentHistory />} />
         {/* Catch-all: Redirect unknown routes back to Landing */}
         <Route path="*" element={<Navigate to="/" />} />
 

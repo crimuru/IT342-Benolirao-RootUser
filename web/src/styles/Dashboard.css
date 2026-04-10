@@ -174,9 +174,13 @@
     border-right: 1px solid #edf2f2;
     display: flex;
     flex-direction: column;
-    padding: 2rem 0; /* Remove horizontal padding so active state stretches */
+    /* 🚀 CHANGE: Remove the bottom padding so it doesn't push the footer off-screen */
+    padding: 2rem 0 0 0; 
     z-index: 1000;
+    /* 🚀 ADD: This ensures padding doesn't add to the total height */
+    box-sizing: border-box; 
 }
+
 
 /* Header & Logo */
 .sidebar-header {
@@ -210,6 +214,11 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px; /* Gives a little breathing room */
 }
 
 .sidebar-nav li {
@@ -246,14 +255,32 @@
     border-top: 1px solid #f1f5f9;
 }
 
-.sidebar-footer a {
+.sidebar-footer a,
+.sidebar-footer .logout-button {
     display: flex;
     align-items: center;
     gap: 12px;
+    width: 100%;
     padding: 12px 1rem;
     color: #666;
     text-decoration: none;
     font-weight: 500;
+    padding: 1rem 1rem 1.5rem; /* Added bottom padding */
+    
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: auto;
+    /* 🚀 CHANGE: Add a bit of bottom padding so the text isn't touching the edge */
+    padding: 1rem 1rem 2rem 1rem; 
+    border-top: 1px solid #f1f5f9;
+    
+}
+
+.sidebar-footer .logout-button:hover,
+.sidebar-footer a:hover {
+    background: #f0fdfc;
+    color: #1a9c92;
 }
 
 /* Custom Modal Overlay */

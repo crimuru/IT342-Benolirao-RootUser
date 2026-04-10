@@ -18,8 +18,13 @@ const Login = () => {
       const response = await axios.post('http://localhost:8080/api/auth/login', loginData);
       
       if (response.status === 200) {
-        // 🚀 THE FIX: Save the User object Spring Boot just sent us into the "VIP Badge"
-        localStorage.setItem("user", JSON.stringify(response.data));
+        const loggedInUser = {
+          id: response.data.id,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          email: response.data.email,
+        };
+        localStorage.setItem("user", JSON.stringify(loggedInUser));
         
         alert("Login Successful!");
         navigate('/dashboard'); 

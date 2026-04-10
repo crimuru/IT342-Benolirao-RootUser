@@ -8,7 +8,7 @@ import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ id: 1, fullName: "Clyde Benolirao" });
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Modal States
@@ -31,8 +31,21 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchDashboardData();
-  }, []);
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      navigate('/login');
+      return;
+    }
+
+    const storedUser = JSON.parse(userString);
+    setUser(storedUser);
+  }, [navigate]);
+
+  useEffect(() => {
+    if (user?.id) {
+      fetchDashboardData();
+    }
+  }, [user]);
 
   const fetchDashboardData = async () => {
     try {
@@ -122,7 +135,7 @@ const Dashboard = () => {
       <main className="dashboard-content">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="content-header">
           <div className="welcome-section">
-            <h1>{getGreeting()}, {user.fullName ? user.fullName.split(" ")[0] : "User"}! 👋</h1>
+            <h1>{getGreeting()}, {user ? ((user.fullName || `${user.firstName || ''} ${user.lastName || ''}`).split(" ")[0]) : "User"}! 👋</h1>
             <p>Here's an overview of your dental appointments.</p>
           </div>
           <button className="btn-book" onClick={() => navigate('/book')}>

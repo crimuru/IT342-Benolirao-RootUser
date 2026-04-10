@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { User, Mail, Phone, Save, CheckCircle2, Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import '../styles/Profile.css';
 
 const Profile = () => {
+  const navigate = useNavigate();
   // 1. Initialize state with empty strings (ready for API data)
   const [profileData, setProfileData] = useState({
     firstName: '',
@@ -19,10 +21,17 @@ const Profile = () => {
 
   // 🔌 2. Fetch real user data on load
   useEffect(() => {
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      navigate('/login');
+      return;
+    }
+
+    const loggedInUser = JSON.parse(userString);
+
     const fetchUserData = async () => {
       try {
-        // Using ID 1 for testing - adjust based on your logged-in user logic
-        const response = await fetch("http://localhost:8080/api/users/1");
+        const response = await fetch(`http://localhost:8080/api/users/${loggedInUser.id}`);
         if (response.ok) {
           const data = await response.json();
           setProfileData(data);
@@ -35,7 +44,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,8 +60,16 @@ const Profile = () => {
     setIsSaving(true);
     setShowSuccess(false);
 
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      navigate('/login');
+      return;
+    }
+
+    const loggedInUser = JSON.parse(userString);
+
     try {
-      const response = await fetch(`http://localhost:8080/api/users/1`, {
+      const response = await fetch(`http://localhost:8080/api/users/${loggedInUser.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profileData),

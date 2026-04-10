@@ -32,6 +32,44 @@
   align-items: stretch;
 }
 
+.select-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0 16px;
+  background-color: #fafbfc;
+  transition: border-color 0.2s ease;
+}
+
+.select-input-wrapper select {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 14px 0;
+  font-size: 0.95rem;
+  color: #333;
+  outline: none;
+  font-family: inherit;
+  appearance: none;
+}
+
+.slot-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  color: #475569;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.slot-subtitle {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
 /* Card Styling */
 .booking-card {
   background: white;
@@ -120,6 +158,31 @@
   background-color: #1a9c92;
   border-color: #1a9c92;
   color: white;
+}
+
+.slot-placeholder {
+  padding: 24px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #475569;
+  text-align: center;
+}
+
+.slot-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  color: #475569;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.slot-subtitle {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 0.95rem;
 }
 
 /* Textarea Customization */

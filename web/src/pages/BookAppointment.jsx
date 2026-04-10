@@ -7,11 +7,21 @@ const BookAppointment = () => {
   const [bookingData, setBookingData] = useState({
     date: '',
     time: '',
+    consultation: 'General Consultation',
     concern: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const consultationTypes = [
+    'General Consultation',
+    'Teeth Cleaning',
+    'Whitening',
+    'Braces Consultation',
+    'Tooth Extraction',
+    'Dental Checkup'
+  ];
 
   const timeSlots = [
     '09:00 AM', '09:30 AM', '10:00 AM',
@@ -23,10 +33,15 @@ const BookAppointment = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setBookingData(prev => ({ ...prev, [name]: value }));
+    setBookingData(prev => ({
+      ...prev,
+      [name]: value,
+      ...(name === 'date' ? { time: '' } : {}),
+    }));
   };
 
   const handleTimeSelect = (selectedTime) => {
+    if (!bookingData.date) return;
     setBookingData(prev => ({ ...prev, time: selectedTime }));
   };
 
@@ -113,28 +128,62 @@ const BookAppointment = () => {
               </div>
             </div>
 
-            {/* Time Selection */}
+            {/* Consultation Type */}
             <div className="booking-card">
               <div className="card-header">
-                <Clock className="header-icon" size={20} />
-                <h3>Select Time</h3>
+                <FileText className="header-icon" size={20} />
+                <h3>Consultation Type</h3>
               </div>
-              <div className="time-grid">
-                {timeSlots.map((slot) => (
-                  <button
-                    key={slot}
-                    type="button"
-                    className={`time-slot-btn ${bookingData.time === slot ? 'selected' : ''}`}
-                    onClick={() => handleTimeSelect(slot)}
-                  >
-                    {slot}
-                  </button>
-                ))}
+              <div className="input-wrapper select-input-wrapper">
+                <select
+                  name="consultation"
+                  value={bookingData.consultation}
+                  onChange={handleChange}
+                >
+                  {consultationTypes.map((type) => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
 
           {/* Concern Textarea */}
+          <div className="booking-card full-width">
+            <div className="card-header">
+              <Clock className="header-icon" size={20} />
+              <div>
+                <h3>Available Slots</h3>
+                <p className="slot-subtitle">Pick a date first to see the available time slots.</p>
+              </div>
+            </div>
+
+            {!bookingData.date ? (
+              <div className="slot-placeholder">
+                <p>Please select a date first to view available appointment times.</p>
+              </div>
+            ) : (
+              <>
+                <div className="slot-meta">
+                  <span>{`${timeSlots.length} slots available on ${new Date(bookingData.date).toLocaleDateString('en-US')}`}</span>
+                  {bookingData.time && <span>Selected: {bookingData.time}</span>}
+                </div>
+                <div className="time-grid">
+                  {timeSlots.map((slot) => (
+                    <button
+                      key={slot}
+                      type="button"
+                      className={`time-slot-btn ${bookingData.time === slot ? 'selected' : ''}`}
+                      onClick={() => handleTimeSelect(slot)}
+                    >
+                      {slot}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
           <div className="booking-card full-width">
             <div className="card-header">
               <FileText className="header-icon" size={20} />

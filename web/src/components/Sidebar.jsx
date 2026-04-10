@@ -1,10 +1,16 @@
 import React from 'react';
-import { LayoutGrid, CalendarDays, User, LogOut } from "lucide-react";
-import { useLocation, Link } from 'react-router-dom'; // 1. Import useLocation and Link
+import { LayoutGrid, CalendarDays, User, LogOut, Clock } from "lucide-react";
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import '../styles/Dashboard.css'; 
 
 const Sidebar = () => {
-    const location = useLocation(); // 2. Get the current URL path
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        navigate('/');
+    };
 
     return (
         <aside className="sidebar">
@@ -15,7 +21,6 @@ const Sidebar = () => {
 
             <nav className="sidebar-nav">
                 <ul>
-                    {/* 3. Dynamically check if the current path matches the menu item */}
                     <li className={location.pathname === '/dashboard' ? 'active' : ''}>
                         <Link to="/dashboard">
                             <LayoutGrid size={20} />
@@ -28,6 +33,12 @@ const Sidebar = () => {
                             <span>Book Appointment</span>
                         </Link>
                     </li>
+                    <li className={location.pathname === '/history' ? 'active' : ''}>
+                        <Link to="/history">
+                            <Clock size={20} />
+                            <span>History</span>
+                        </Link>
+                    </li>
                     <li className={location.pathname === '/profile' ? 'active' : ''}>
                         <Link to="/profile">
                             <User size={20} />
@@ -38,10 +49,10 @@ const Sidebar = () => {
             </nav>
 
             <div className="sidebar-footer">
-                <Link to="/logout">
+                <button type="button" className="logout-button" onClick={handleLogout}>
                     <LogOut size={20} />
                     <span>Sign Out</span>
-                </Link>
+                </button>
             </div>
         </aside>
     );
