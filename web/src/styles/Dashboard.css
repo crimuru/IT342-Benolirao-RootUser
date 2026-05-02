@@ -1,14 +1,14 @@
 /* Layout & Sidebar Offset */
 .dashboard-layout {
   display: flex;
-  background-color: #f8fafb;
+  background-color: var(--background);
   min-height: 100vh;
 }
 
 .dashboard-content {
-  margin-left: 260px; /* Width of your reusable Sidebar */
+  margin-left: 280px; /* Width of reusable Sidebar */
   flex: 1;
-  padding: 40px 60px;
+  padding: 48px 60px;
 }
 
 /* Header Section */
@@ -16,197 +16,217 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .welcome-section h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin: 0;
-  color: #111;
+  color: var(--secondary);
   font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .welcome-section p {
-  color: #666;
-  margin: 5px 0 0;
+  color: var(--text-muted);
+  margin: 8px 0 0;
+  font-size: 1.1rem;
 }
 
 .btn-book {
-  background-color: #1a9c92; /* Your primary teal color */
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 12px 24px;
+  border-radius: 12px;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-book:hover {
-  background-color: #16867e;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Stats Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: 28px;
+  margin-bottom: 48px;
 }
 
 .stat-card {
-  background: white;
-  padding: 24px;
-  border-radius: 16px;
+  background: var(--surface);
+  padding: 28px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  gap: 20px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  gap: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  transition: transform var(--transition-normal);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
 }
 
 .stat-icon-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 /* Dynamic Stat Colors */
-.bg-teal-light { background: #f0fdfc; }
-.text-teal { color: #1a9c92; }
+.bg-teal-light { background: var(--primary-light); }
+.text-teal { color: var(--primary); }
 
-.bg-green-light { background: #f0fdf4; }
-.text-green { color: #22c55e; }
+.bg-green-light { background: var(--success-light); }
+.text-green { color: var(--success); }
 
-.bg-amber-light { background: #fffaf0; }
-.text-amber { color: #f59e0b; }
+.bg-amber-light { background: var(--warning-light); }
+.text-amber { color: var(--warning); }
 
-.stat-text p { margin: 0; color: #666; font-size: 0.9rem; }
-.stat-text h3 { margin: 0; font-size: 1.6rem; font-weight: 700; }
+.stat-text p { margin: 0; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;}
+.stat-text h3 { margin: 4px 0 0; font-size: 2rem; font-weight: 800; color: var(--secondary); letter-spacing: -0.5px;}
 
 /* Appointments Container */
 .appointments-container {
-  background: white;
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  background: var(--surface);
+  padding: 36px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .appointments-container h2 {
-  font-size: 1.25rem;
-  margin: 0 0 24px;
-  color: #111;
+  font-size: 1.4rem;
+  margin: 0 0 28px;
+  color: var(--secondary);
 }
 
 .appointment-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: #fbfefd;
-  border: 1px solid #f0f7f7;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  padding: 20px;
+  background: var(--background);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  transition: all var(--transition-fast);
+}
+
+.appointment-item:hover {
+  background: white;
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary-light);
 }
 
 .item-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 /* Date Badge Logic */
 .date-badge {
-  background: #f0fdfc;
-  padding: 8px 12px;
-  border-radius: 10px;
+  background: var(--primary-light);
+  padding: 12px;
+  border-radius: 12px;
   text-align: center;
-  min-width: 55px;
+  min-width: 65px;
 }
 
 .date-badge .month {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: #1a9c92;
+  color: var(--primary-hover);
   text-transform: uppercase;
 }
 
 .date-badge .day {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  color: #1a9c92; 
+  color: var(--primary); 
 }
 
 .details strong {
   display: block;
   font-weight: 600;
-  color: #111;
+  color: var(--secondary);
+  font-size: 1.1rem;
 }
 
 .details p {
-  margin: 2px 0 0;
-  color: #777;
-  font-size: 0.85rem;
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 .empty-msg {
   text-align: center;
-  color: #999;
-  padding: 20px;
+  color: var(--text-muted);
+  padding: 40px;
+  font-size: 1.1rem;
 }
-
 
 /* Sidebar Container */
 .sidebar {
-    width: 260px;
-    background: white;
+    width: 280px;
+    background: var(--surface);
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    border-right: 1px solid #edf2f2;
+    border-right: 1px solid rgba(226, 232, 240, 0.8);
     display: flex;
     flex-direction: column;
-    /* 🚀 CHANGE: Remove the bottom padding so it doesn't push the footer off-screen */
-    padding: 2rem 0 0 0; 
+    padding: 2.5rem 0 0 0; 
     z-index: 1000;
-    /* 🚀 ADD: This ensures padding doesn't add to the total height */
     box-sizing: border-box; 
+    box-shadow: 2px 0 10px rgba(0,0,0,0.02);
 }
-
 
 /* Header & Logo */
 .sidebar-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     padding: 0 2rem 3rem;
 }
 
-.logo-icon {
-    background: #1a9c92;
+.sidebar .logo-icon {
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    border-radius: 12px;
     font-weight: bold;
+    box-shadow: var(--shadow-sm);
 }
 
-.logo-text {
-    font-size: 1.2rem;
+.sidebar .logo-text {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
     font-weight: 700;
     margin: 0;
-    color: #111;
+    color: var(--secondary);
+    letter-spacing: -0.5px;
 }
 
 /* Navigation List */
@@ -218,69 +238,69 @@
 .sidebar-nav {
     flex: 1;
     overflow-y: auto;
-    margin-bottom: 10px; /* Gives a little breathing room */
+    margin-bottom: 20px;
 }
 
 .sidebar-nav li {
-    margin: 4px 1rem;
+    margin: 8px 1.5rem;
 }
 
 .sidebar-nav li a {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 1rem;
-    color: #666;
+    gap: 16px;
+    padding: 14px 1.25rem;
+    color: var(--text-muted);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-weight: 500;
-    transition: 0.2s;
+    transition: all var(--transition-fast);
 }
 
-/* Active State - This is the teal box in your design */
+/* Active State */
 .sidebar-nav li.active a {
-    background: #1a9c92;
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: white;
+    box-shadow: var(--shadow-md);
 }
 
 .sidebar-nav li a:hover:not(.active) {
-    background: #f0fdfc;
-    color: #1a9c92;
+    background: var(--background);
+    color: var(--primary);
+    transform: translateX(4px);
 }
 
 /* Footer / Sign Out */
 .sidebar-footer {
     margin-top: auto;
-    padding: 1rem 1rem 0;
-    border-top: 1px solid #f1f5f9;
+    padding: 1.5rem 1.5rem 2rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.8);
+    background: var(--surface);
 }
 
 .sidebar-footer a,
 .sidebar-footer .logout-button {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     width: 100%;
-    padding: 12px 1rem;
-    color: #666;
+    color: var(--text-muted);
     text-decoration: none;
     font-weight: 500;
-    padding: 1rem 1rem 1.5rem; /* Added bottom padding */
-    
     background: transparent;
     border: none;
     cursor: pointer;
-    margin-top: auto;
-    /* 🚀 CHANGE: Add a bit of bottom padding so the text isn't touching the edge */
-    padding: 1rem 1rem 2rem 1rem; 
-    border-top: 1px solid #f1f5f9;
-    
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+    padding: 14px 1.25rem;
+    border-radius: 12px;
 }
 
 .sidebar-footer .logout-button:hover,
 .sidebar-footer a:hover {
-    background: #f0fdfc;
-    color: #1a9c92;
+    background: var(--danger-light);
+    color: var(--danger);
+    transform: translateX(4px);
 }
 
 /* Custom Modal Overlay */
@@ -290,58 +310,78 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(15, 23, 42, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99999 !important; /* Force to top */
+  z-index: 99999 !important; 
   backdrop-filter: blur(8px);
-  /* This ensures the overlay doesn't "swallow" the click */
   pointer-events: all; 
 }
 
 /* Modal Card */
 .modal-card {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-  max-width: 420px;
+  background: var(--surface);
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  max-width: 440px;
   width: 90%;
   text-align: center;
   position: relative;
-  /* Higher than overlay */
   z-index: 100000 !important; 
-  /* Force it to be clickable */
   pointer-events: auto !important; 
+}
+
+.modal-icon-header {
+  margin-bottom: 20px;
+}
+
+.modal-card h3 {
+  font-size: 1.5rem;
+  color: var(--secondary);
+  margin-bottom: 12px;
+}
+
+.modal-card p {
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 32px;
 }
 
 .modal-actions {
   display: flex;
-  gap: 12px;
-  margin-top: 1rem;
+  gap: 16px;
 }
 
 .btn-no, .btn-yes {
   flex: 1;
-  padding: 14px; /* Slightly larger for easier clicking */
-  border-radius: 10px;
-  font-weight: 700;
+  padding: 16px; 
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer !important;
-  /* Ensures no other layer blocks the button */
-  position: relative;
-  z-index: 100001 !important; 
-  pointer-events: auto !important;
+  transition: all var(--transition-fast);
 }
 
 .btn-yes {
-  background: #ff4d4d;
+  background: var(--danger);
   color: white;
   border: none;
 }
 
+.btn-yes:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 .btn-no {
-  background: #f3f4f6;
-  color: #374151;
-  border: 1px solid #e5e7eb;
+  background: white;
+  color: var(--text-main);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.btn-no:hover {
+  background: var(--background);
 }

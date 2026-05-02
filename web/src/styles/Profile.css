@@ -1,24 +1,24 @@
 /* Ensure the page uses the same layout spacing */
 .profile-page {
-  padding: 40px 60px;
+  padding: 48px 60px;
 }
 
 /* Grid Layout for the two cards */
 .profile-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* Left card takes 1 part, right takes 2 parts */
-  gap: 30px;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
   align-items: start;
 }
 
 /* Card Common Styles */
 .profile-summary-card,
 .profile-edit-card {
-  background: white;
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  border: 1px solid #f0f7f7;
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 48px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 /* --- Left Card: Summary Styles --- */
@@ -30,110 +30,117 @@
 }
 
 .avatar-circle {
-  width: 120px;
-  height: 120px;
-  background-color: #38b2ac; /* Matching your Figma teal */
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
   color: white;
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-md);
 }
 
 .profile-name {
-  font-size: 1.4rem;
-  color: #111;
-  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+  color: var(--secondary);
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
 }
 
 .profile-email {
-  color: #666;
-  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
   margin: 0 0 8px 0;
 }
 
 .profile-date {
-  color: #999;
-  font-size: 0.85rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
   margin: 0;
 }
 
 /* --- Right Card: Form Styles --- */
 .card-title {
-  font-size: 1.1rem;
-  color: #111;
-  margin: 0 0 30px 0;
-  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--secondary);
+  margin: 0 0 36px 0;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .profile-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
 .form-group label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
+  color: var(--secondary);
+  margin-bottom: 10px;
 }
 
 /* Input Wrappers (Icons inside inputs) */
 .input-wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0 16px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  padding: 0 20px;
   background-color: #fafbfc;
-  transition: border-color 0.2s ease;
+  transition: all var(--transition-fast);
 }
 
 .input-wrapper:focus-within {
-  border-color: #38b2ac;
-  background-color: #ffffff;
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 4px var(--primary-light);
 }
 
 .input-icon {
-  color: #94a3b8;
-  margin-right: 12px;
+  color: var(--text-muted);
+  margin-right: 16px;
 }
 
 .input-wrapper input {
   flex: 1;
   border: none;
   background: transparent;
-  padding: 14px 0;
-  font-size: 0.95rem;
-  color: #333;
+  padding: 16px 0;
+  font-size: 1rem;
+  color: var(--text-main);
   outline: none;
 }
 
 /* Save Button */
 .btn-save {
-  background-color: #38b2ac;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
   color: white;
   border: none;
-  padding: 14px 24px;
-  border-radius: 8px;
+  padding: 16px 32px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  width: max-content; /* Keeps button from stretching full width */
-  margin-top: 10px;
-  transition: background-color 0.2s ease;
+  width: max-content;
+  margin-top: 16px;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-save:hover {
-  background-color: #319795;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 
@@ -141,23 +148,28 @@
 .form-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 10px;
+  gap: 20px;
+  margin-top: 16px;
 }
 
 .btn-save:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .success-msg {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #059669; /* Emerald green */
-  font-weight: 500;
-  font-size: 0.9rem;
+  gap: 10px;
+  color: var(--success);
+  font-weight: 600;
+  font-size: 1rem;
   animation: fadeIn 0.3s ease-in-out;
+  padding: 12px 20px;
+  background: var(--success-light);
+  border-radius: 10px;
 }
 
 /* Spinner Animation */
@@ -171,6 +183,6 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }

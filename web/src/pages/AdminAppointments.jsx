@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, XCircle } from "lucide-react";
 import AdminSidebar from "../components/AdminSidebar";
 import StatusBadge from "../components/StatusBadge";
-import "../styles/Dashboard.css";
+import "../styles/Admin.css";
 
 const AdminAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -66,90 +66,91 @@ const AdminAppointments = () => {
     });
 
   return (
-    <div className="dashboard-layout">
+    <div className="admin-layout">
       <AdminSidebar />
-      <main className="dashboard-content" style={{ background: '#f8fafc' }}>
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="content-header">
-          <div className="welcome-section">
+      <main className="admin-content">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="admin-header">
+          <div>
             <h1>All Appointments</h1>
             <p>Manage all system-wide patient appointments.</p>
           </div>
         </motion.div>
 
-        <div style={{ display: 'flex', gap: '10px', marginTop: '20px', overflowX: 'auto', paddingBottom: '10px' }}>
+        <div className="admin-filters">
           {['all', 'pending', 'approved', 'completed', 'cancelled'].map(f => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '20px',
-                border: filter === f ? 'none' : '1px solid #cbd5e1',
-                backgroundColor: filter === f ? '#0f172a' : 'white',
-                color: filter === f ? 'white' : '#64748b',
-                cursor: 'pointer',
-                textTransform: 'capitalize',
-                fontWeight: '500',
-                whiteSpace: 'nowrap'
-              }}
+              className={`filter-pill ${filter === f ? 'active' : ''}`}
             >
               {f}
             </button>
           ))}
         </div>
 
-        <div className="appointments-container" style={{ marginTop: '10px' }}>
+        <div style={{ marginTop: '20px' }}>
           {loading ? (
             <p>Loading appointments...</p>
           ) : filteredAndSortedAppointments.length === 0 ? (
-            <p>No appointments found.</p>
-          ) : (
-            <div className="appointment-list">
-              {filteredAndSortedAppointments.map((apt) => (
-                <div key={apt.id} className="appointment-item">
-                  <div className="item-left">
-                    <div className="date-badge">
-                      <span className="month">{new Date(apt.date).toLocaleDateString("en-US", { month: "short" })}</span>
-                      <span className="day">{new Date(apt.date).getDate()}</span>
-                    </div>
-                    <div className="details">
-                      <strong>{apt.user.firstName} {apt.user.lastName} - {apt.time}</strong>
-                      <p>{apt.concern || "No concern provided"}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="item-right" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <StatusBadge status={apt.status} />
-                    {apt.status === 'pending' && (
-                      <div style={{ display: 'flex', gap: '10px' }}>
-                        <button 
-                          onClick={() => updateStatus(apt.id, 'approved')}
-                          style={{ background: 'none', border: 'none', color: '#10b981', cursor: 'pointer' }}
-                          title="Approve"
-                        >
-                          <CheckCircle size={22} />
-                        </button>
-                        <button 
-                          onClick={() => updateStatus(apt.id, 'cancelled')}
-                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}
-                          title="Reject"
-                        >
-                          <XCircle size={22} />
-                        </button>
-                      </div>
-                    )}
-                    {apt.status === 'approved' && (
-                        <button 
-                          onClick={() => updateStatus(apt.id, 'completed')}
-                          style={{ background: '#10b981', border: 'none', color: 'white', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}
-                        >
-                          Mark Complete
-                        </button>
-                    )}
-                  </div>
-                </div>
-              ))}
+            <div className="admin-empty-state">
+                <p>No appointments found for "{filter}".</p>
             </div>
+          ) : (
+            <motion.div layout className="admin-appointment-list">
+              <AnimatePresence>
+                {filteredAndSortedAppointments.map((apt) => (
+                  <motion.div 
+                    layout
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    key={apt.id} 
+                    className="admin-appointment-card"
+                  >
+                    <div className="admin-appt-left">
+                      <div className="admin-appt-date">
+                        <span className="month">{new Date(apt.date).toLocaleDateString("en-US", { month: "short" })}</span>
+                        <span className="day">{new Date(apt.date).getDate()}</span>
+                      </div>
+                      <div className="admin-appt-info">
+                        <h4>{apt.user.firstName} {apt.user.lastName} - {apt.time}</h4>
+                        <p>{apt.concern || "No concern provided"}</p>
+                      </div>
+                    </div>
+                    
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                      <StatusBadge status={apt.status} />
+                      {apt.status === 'pending' && (
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <button 
+                            onClick={() => updateStatus(apt.id, 'approved')}
+                            className="action-btn approve"
+                            title="Approve"
+                          >
+                            <CheckCircle size={24} />
+                          </button>
+                          <button 
+                            onClick={() => updateStatus(apt.id, 'cancelled')}
+                            className="action-btn delete"
+                            title="Reject"
+                          >
+                            <XCircle size={24} />
+                          </button>
+                        </div>
+                      )}
+                      {apt.status === 'approved' && (
+                          <button 
+                            onClick={() => updateStatus(apt.id, 'completed')}
+                            style={{ background: '#10b981', border: 'none', color: 'white', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}
+                          >
+                            Mark Complete
+                          </button>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           )}
         </div>
       </main>

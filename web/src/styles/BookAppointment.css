@@ -1,20 +1,23 @@
 /* Page Setup */
 .book-appointment-page {
-  padding: 40px 60px;
+  padding: 48px 60px;
 }
 
 .page-header {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .page-header h1 {
-  font-size: 1.8rem;
-  color: #111;
-  margin: 0 0 5px 0;
+  font-size: 2.2rem;
+  color: var(--secondary);
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
 }
 
 .page-header p {
-  color: #666;
+  color: var(--text-muted);
+  font-size: 1.1rem;
   margin: 0;
 }
 
@@ -22,61 +25,52 @@
 .booking-form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
 }
 
 .booking-top-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 32px;
   align-items: stretch;
 }
 
 .select-input-wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0 16px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  padding: 0 20px;
   background-color: #fafbfc;
-  transition: border-color 0.2s ease;
+  transition: all var(--transition-fast);
 }
 
 .select-input-wrapper select {
   flex: 1;
   border: none;
   background: transparent;
-  padding: 14px 0;
-  font-size: 0.95rem;
-  color: #333;
+  padding: 16px 0;
+  font-size: 1rem;
+  color: var(--text-main);
   outline: none;
   font-family: inherit;
   appearance: none;
+  cursor: pointer;
 }
 
-.slot-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-  color: #475569;
-  font-size: 0.95rem;
-  flex-wrap: wrap;
-}
-
-.slot-subtitle {
-  margin: 4px 0 0;
-  color: #64748b;
-  font-size: 0.95rem;
+.select-input-wrapper:focus-within {
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 4px var(--primary-light);
 }
 
 /* Card Styling */
 .booking-card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  border: 1px solid #f0f7f7;
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .booking-card.full-width {
@@ -86,147 +80,157 @@
 .card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
+  gap: 12px;
+  margin-bottom: 28px;
 }
 
 .card-header h3 {
   margin: 0;
-  font-size: 1.1rem;
-  color: #111;
-  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--secondary);
+  font-weight: 700;
 }
 
 .header-icon {
-  color: #1a9c92; /* Teal matching your UI */
+  color: var(--primary);
 }
 
 /* Date Input Customization */
 .date-input-wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0 16px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  padding: 0 20px;
   background-color: #fafbfc;
-  transition: border-color 0.2s ease;
+  transition: all var(--transition-fast);
 }
 
 .date-input-wrapper:focus-within {
-  border-color: #1a9c92;
-  background-color: #ffffff;
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 4px var(--primary-light);
 }
 
 .date-input-wrapper input[type="date"] {
   flex: 1;
   border: none;
   background: transparent;
-  padding: 14px 0;
-  font-size: 0.95rem;
-  color: #333;
+  padding: 16px 0;
+  font-size: 1rem;
+  color: var(--text-main);
   outline: none;
   font-family: inherit;
+  cursor: pointer;
 }
 
 /* Time Slot Grid */
 .time-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 
 .time-slot-btn {
   background: transparent;
-  border: 1px solid #e2e8f0;
-  color: #475569;
-  padding: 12px 0;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  color: var(--text-muted);
+  padding: 14px 0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-fast);
 }
 
 .time-slot-btn:hover {
-  border-color: #1a9c92;
-  color: #1a9c92;
-  background-color: #f0fdfc;
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
 }
 
-/* When a user clicks a time slot */
 .time-slot-btn.selected {
-  background-color: #1a9c92;
-  border-color: #1a9c92;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  border-color: transparent;
   color: white;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
 }
 
 .slot-placeholder {
-  padding: 24px;
-  border: 1px dashed #cbd5e1;
-  border-radius: 12px;
+  padding: 32px;
+  border: 2px dashed rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
   background: #f8fafc;
-  color: #475569;
+  color: var(--text-muted);
   text-align: center;
+  font-size: 1.05rem;
 }
 
 .slot-meta {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 16px;
-  color: #475569;
-  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  font-size: 1rem;
   flex-wrap: wrap;
 }
 
 .slot-subtitle {
   margin: 4px 0 0;
-  color: #64748b;
+  color: var(--text-light);
   font-size: 0.95rem;
 }
 
 /* Textarea Customization */
 textarea {
   width: 100%;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 16px;
-  font-size: 0.95rem;
-  color: #333;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+  font-size: 1rem;
+  color: var(--text-main);
   background-color: #fafbfc;
   outline: none;
-  resize: vertical; /* Allows user to pull it down slightly */
-  transition: border-color 0.2s ease;
+  resize: vertical;
+  transition: all var(--transition-fast);
   font-family: inherit;
-  box-sizing: border-box; /* Ensures padding doesn't break width */
+  box-sizing: border-box;
 }
 
 textarea:focus {
-  border-color: #1a9c92;
-  background-color: #ffffff;
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 4px var(--primary-light);
 }
 
 /* Confirm Button */
 .btn-confirm {
-  background-color: #1a9c92;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
   color: white;
   border: none;
-  padding: 14px 30px;
-  border-radius: 8px;
+  padding: 16px 40px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-confirm:hover:not(:disabled) {
-  background-color: #16867e;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-confirm:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
+  background: var(--text-muted);
+  box-shadow: none;
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
 import AdminSidebar from "../components/AdminSidebar";
-import "../styles/Dashboard.css";
+import "../styles/Admin.css";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -44,53 +44,50 @@ const AdminUsers = () => {
   };
 
   return (
-    <div className="dashboard-layout">
+    <div className="admin-layout">
       <AdminSidebar />
-      <main className="dashboard-content" style={{ background: '#f8fafc' }}>
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="content-header">
-          <div className="welcome-section">
+      <main className="admin-content">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="admin-header">
+          <div>
             <h1>User Management</h1>
             <p>View and manage all registered accounts.</p>
           </div>
         </motion.div>
 
-        <div className="appointments-container" style={{ marginTop: '20px' }}>
-          {loading ? (
-            <p>Loading users...</p>
-          ) : (
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+        {loading ? (
+          <p>Loading users...</p>
+        ) : (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            className="admin-table-container"
+          >
+            <table className="admin-table">
               <thead>
-                <tr style={{ borderBottom: '2px solid #e2e8f0' }}>
-                  <th style={{ padding: '12px' }}>ID</th>
-                  <th style={{ padding: '12px' }}>Name</th>
-                  <th style={{ padding: '12px' }}>Email</th>
-                  <th style={{ padding: '12px' }}>Role</th>
-                  <th style={{ padding: '12px' }}>Actions</th>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map(user => (
-                  <tr key={user.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
-                    <td style={{ padding: '12px' }}>{user.id}</td>
-                    <td style={{ padding: '12px' }}>{user.firstName} {user.lastName}</td>
-                    <td style={{ padding: '12px' }}>{user.email}</td>
-                    <td style={{ padding: '12px' }}>
-                        <span style={{ 
-                            background: user.role === 'ADMIN' ? '#dbeafe' : '#f1f5f9',
-                            color: user.role === 'ADMIN' ? '#1e40af' : '#475569',
-                            padding: '4px 8px',
-                            borderRadius: '4px',
-                            fontSize: '0.85rem',
-                            fontWeight: 'bold'
-                         }}>
+                  <tr key={user.id}>
+                    <td style={{ fontWeight: 600 }}>#{user.id}</td>
+                    <td>{user.firstName} {user.lastName}</td>
+                    <td style={{ color: '#64748b' }}>{user.email}</td>
+                    <td>
+                        <span className={`role-badge ${user.role.toLowerCase()}`}>
                             {user.role}
                         </span>
                     </td>
-                    <td style={{ padding: '12px' }}>
+                    <td>
                       {user.role !== 'ADMIN' && (
                         <button 
                             onClick={() => deleteUser(user.id)}
-                            style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}
+                            className="action-btn delete"
                             title="Delete User"
                         >
                             <Trash2 size={18} />
@@ -101,8 +98,8 @@ const AdminUsers = () => {
                 ))}
               </tbody>
             </table>
-          )}
-        </div>
+          </motion.div>
+        )}
       </main>
     </div>
   );

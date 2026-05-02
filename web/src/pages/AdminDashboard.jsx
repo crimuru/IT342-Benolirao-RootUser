@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, CalendarDays, AlertCircle } from "lucide-react";
 import AdminSidebar from "../components/AdminSidebar";
-import "../styles/Dashboard.css";
+import "../styles/Admin.css";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -32,17 +32,17 @@ const AdminDashboard = () => {
   };
 
   const statCards = [
-    { label: "Total Users", value: stats.totalUsers, icon: Users, color: "text-blue", bg: "bg-blue-light" },
-    { label: "Total Appointments", value: stats.totalAppointments, icon: CalendarDays, color: "text-teal", bg: "bg-teal-light" },
-    { label: "Pending Requests", value: stats.pendingAppointments, icon: AlertCircle, color: "text-amber", bg: "bg-amber-light" },
+    { label: "Total Users", value: stats.totalUsers, icon: Users, color: "#38bdf8", bg: "#e0f2fe" },
+    { label: "Total Appointments", value: stats.totalAppointments, icon: CalendarDays, color: "#10b981", bg: "#d1fae5" },
+    { label: "Pending Requests", value: stats.pendingAppointments, icon: AlertCircle, color: "#f59e0b", bg: "#fef3c7" },
   ];
 
   return (
-    <div className="dashboard-layout">
+    <div className="admin-layout">
       <AdminSidebar />
-      <main className="dashboard-content" style={{ background: '#f8fafc' }}>
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="content-header">
-          <div className="welcome-section">
+      <main className="admin-content">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="admin-header">
+          <div>
             <h1>System Overview</h1>
             <p>Welcome to the RootUser Administrative Portal.</p>
           </div>
@@ -51,11 +51,16 @@ const AdminDashboard = () => {
         {loading ? (
           <p>Loading statistics...</p>
         ) : (
-          <div className="stats-grid">
+          <div className="admin-stats-grid">
             {statCards.map((stat) => (
-              <div key={stat.label} className="stat-card" style={{ borderTop: `4px solid ${stat.color === 'text-blue' ? '#3b82f6' : stat.color === 'text-teal' ? '#14b8a6' : '#f59e0b'}` }}>
-                <div className={`stat-icon-circle ${stat.bg} ${stat.color}`}><stat.icon size={24} /></div>
-                <div className="stat-text"><p>{stat.label}</p><h3>{stat.value}</h3></div>
+              <div key={stat.label} className="admin-stat-card" style={{ color: stat.color }}>
+                <div className="admin-stat-icon" style={{ backgroundColor: stat.bg, color: stat.color }}>
+                  <stat.icon size={32} />
+                </div>
+                <div className="admin-stat-info">
+                  <p>{stat.label}</p>
+                  <h3>{stat.value}</h3>
+                </div>
               </div>
             ))}
           </div>

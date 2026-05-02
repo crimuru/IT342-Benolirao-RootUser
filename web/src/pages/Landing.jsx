@@ -5,7 +5,7 @@ import { CalendarDays, Shield, Clock, ArrowRight } from "lucide-react";
 // Path points to your 'styles' folder
 import "../styles/Landing.css"; 
 import { Button } from "../components/button"; 
-import landingImg from "../assets/landing.jpg";
+import landingImg from "../assets/landing_premium.png";
 
 const Landing = () => {
   const features = [
@@ -20,15 +20,14 @@ const Landing = () => {
         <div className="container nav-content">
           <div className="logo-section">
             <div className="logo-icon">R</div>
-            <span className="logo-text">RootUser</span>
+            <span className="logo-text text-gradient">RootUser</span>
           </div>
           <div className="nav-actions">
             <Link to="/login">
-              {/* variant="ghost" removes the ugly background box */}
-              <Button variant="ghost" size="sm">Sign In</Button>
+              <Button size="sm" className="btn-gradient">Sign In</Button>
             </Link>
             <Link to="/register">
-              <Button size="sm" className="gradient-hero">Get Started</Button>
+              <Button size="sm" className="btn-gradient">Get Started</Button>
             </Link>
           </div>
         </div>
@@ -42,7 +41,7 @@ const Landing = () => {
             className="hero-text-area"
           >
             <div className="badge">Now accepting online bookings</div>
-            <h1>Your Smile Deserves <span className="text-gradient">The Best Care</span></h1>
+            <h1 className="text-gradient">Your Smile Deserves The Best Care</h1>
             <p>Book dental appointments effortlessly with RootUser. Real-time scheduling, instant confirmations, and a seamless patient experience.</p>
             <Link to="/login">
               <Button size="lg" className="gradient-hero hero-btn">

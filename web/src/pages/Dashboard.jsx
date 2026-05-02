@@ -31,6 +31,29 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    // 🚀 NEW: Check if logging in via Google OAuth
+    const params = new URLSearchParams(window.location.search);
+    const userIdUrl = params.get("userId");
+
+    if (userIdUrl) {
+      const oauthUser = {
+        id: parseInt(userIdUrl, 10),
+        email: params.get("email"),
+        firstName: params.get("firstName"),
+        lastName: params.get("lastName"),
+        role: params.get("role") || 'USER'
+      };
+      localStorage.setItem("user", JSON.stringify(oauthUser));
+      setUser(oauthUser);
+      // Clean up the URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+      
+      if (oauthUser.role === 'ADMIN') {
+        navigate('/admin/dashboard');
+      }
+      return;
+    }
+
     const userString = localStorage.getItem("user");
     if (!userString) {
       navigate('/login');
