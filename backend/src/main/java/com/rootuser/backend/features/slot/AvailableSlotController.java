@@ -1,7 +1,5 @@
 package com.rootuser.backend.features.slot;
 
-import com.rootuser.backend.features.slot.AvailableSlot;
-import com.rootuser.backend.features.slot.AvailableSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

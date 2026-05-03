@@ -1,7 +1,5 @@
 package com.rootuser.backend.features.appointment;
 
-import com.rootuser.backend.features.appointment.Appointment;
-import com.rootuser.backend.features.appointment.AppointmentRepository;
 import com.rootuser.backend.features.slot.AvailableSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

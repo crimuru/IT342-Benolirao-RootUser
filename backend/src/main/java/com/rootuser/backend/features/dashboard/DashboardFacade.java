@@ -1,7 +1,6 @@
 
 package com.rootuser.backend.features.dashboard;
 
-import com.rootuser.backend.features.dashboard.DashboardResponse;
 import com.rootuser.backend.features.appointment.Appointment;
 import com.rootuser.backend.features.appointment.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;

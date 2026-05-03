@@ -1,6 +1,5 @@
 package com.rootuser.backend.features.slot;
 
-import com.rootuser.backend.features.slot.AvailableSlot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,5 @@
 package com.rootuser.backend.features.user;
 
-import com.rootuser.backend.features.user.User;
-import com.rootuser.backend.features.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

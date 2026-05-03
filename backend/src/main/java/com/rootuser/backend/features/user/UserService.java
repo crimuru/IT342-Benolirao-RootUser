@@ -1,7 +1,5 @@
 package com.rootuser.backend.features.user;
 
-import com.rootuser.backend.features.user.User;
-import com.rootuser.backend.features.user.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

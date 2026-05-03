@@ -1,6 +1,5 @@
 package com.rootuser.backend.features.appointment;
 
-import com.rootuser.backend.features.appointment.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

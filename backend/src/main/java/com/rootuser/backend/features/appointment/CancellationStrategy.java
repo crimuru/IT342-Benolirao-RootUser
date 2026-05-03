@@ -1,6 +1,5 @@
 package com.rootuser.backend.features.appointment;
 
-import com.rootuser.backend.features.appointment.Appointment;
 import org.springframework.stereotype.Service;
 
 // 🚀 The Family of Algorithms interface

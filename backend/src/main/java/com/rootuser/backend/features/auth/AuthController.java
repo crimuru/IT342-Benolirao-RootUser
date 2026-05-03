@@ -1,7 +1,6 @@
 package com.rootuser.backend.features.auth;
 
 import com.rootuser.backend.features.user.User;
-import com.rootuser.backend.features.auth.LoginRequest;
 import com.rootuser.backend.features.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
