@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Landing from './pages/Landing'; 
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
-import BookAppointment from './pages/BookAppointment';
-import AppointmentHistory from './pages/AppointmentHistory';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminUsers from './pages/AdminUsers';
-import AdminAppointments from './pages/AdminAppointments';
-import AdminSlots from './pages/AdminSlots';
+import Landing from './features/dashboard/Landing';
+import Register from './features/auth/Register';
+import Login from './features/auth/Login';
+import Dashboard from './features/dashboard/Dashboard';
+import Profile from './features/user/Profile';
+import BookAppointment from './features/appointments/BookAppointment';
+import AppointmentHistory from './features/appointments/AppointmentHistory';
+import AdminDashboard from './features/admin/AdminDashboard';
+import AdminUsers from './features/admin/AdminUsers';
+import AdminAppointments from './features/admin/AdminAppointments';
+import AdminSlots from './features/admin/AdminSlots';
 
 const AdminRoute = ({ children }) => {
   const userString = localStorage.getItem('user');
