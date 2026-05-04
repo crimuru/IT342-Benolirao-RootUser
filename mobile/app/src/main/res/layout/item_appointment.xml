@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+        
+        <!-- Date Badge -->
+        <LinearLayout
+            android:id="@+id/llDateBadge"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_date_badge"
+            android:layout_marginEnd="16dp">
+            <TextView
+                android:id="@+id/tvMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAY"
+                android:textSize="12sp"
+                android:textColor="@color/text_muted"
+                android:textStyle="bold"
+                android:textAllCaps="true"/>
+            <TextView
+                android:id="@+id/tvDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15"
+                android:textSize="20sp"
+                android:textColor="@color/primary"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvConcern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dental Checkup"
+                android:textSize="16sp"
+                android:textColor="@color/text_main"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00 AM - 11:00 AM"
+                android:textSize="14sp"
+                android:textColor="@color/text_muted"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Status & Actions -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:textSize="12sp"
+                android:background="@drawable/bg_status_badge_pending"
+                android:textColor="#B45309"
+                android:textStyle="bold"/>
+                
+            <ImageView
+                android:id="@+id/btnCancel"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:tint="@color/danger"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="4dp"
+                android:layout_marginStart="8dp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+            
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
