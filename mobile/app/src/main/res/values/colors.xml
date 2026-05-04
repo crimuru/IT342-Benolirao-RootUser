@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#0D9488</color>
+    <color name="primary_hover">#0F766E</color>
+    <color name="primary_light">#CCFBF1</color>
+    <color name="secondary">#0F172A</color>
+    <color name="secondary_hover">#1E293B</color>
+    <color name="background">#F8FAFC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_main">#0F172A</color>
+    <color name="text_muted">#64748B</color>
+    <color name="danger">#EF4444</color>
+    <color name="danger_light">#FEE2E2</color>
+    <color name="success">#10B981</color>
+    <color name="success_light">#D1FAE5</color>
+    <color name="warning">#F59E0B</color>
+    <color name="warning_light">#FEF3C7</color>
+    <color name="surface_transparent">#B3FFFFFF</color>
+    <color name="black_transparent">#33000000</color>
+</resources>
