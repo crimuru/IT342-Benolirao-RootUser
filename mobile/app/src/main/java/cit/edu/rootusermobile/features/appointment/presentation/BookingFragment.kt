@@ -46,11 +46,24 @@ class BookingFragment : Fragment() {
         binding.rvSlots.layoutManager = GridLayoutManager(context, 3)
         binding.rvSlots.adapter = slotAdapter
 
-        binding.btnCheckSlots.setOnClickListener {
-            val date = binding.etDate.text.toString()
-            if (date.isNotBlank()) {
-                appointmentViewModel.fetchAvailableSlots(date)
+        val consultationTypes = arrayOf("Checkup", "Cleaning", "Extraction", "Whitening", "Other")
+        val adapter = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, consultationTypes)
+        binding.spinnerConsultation.setAdapter(adapter)
+
+        binding.etDate.setOnClickListener {
+            val datePicker = com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select Date")
+                .setSelection(com.google.android.material.datepicker.MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+            datePicker.addOnPositiveButtonClickListener { selection ->
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                sdf.timeZone = java.util.TimeZone.getTimeZone("UTC")
+                val formattedDate = sdf.format(java.util.Date(selection))
+                binding.etDate.setText(formattedDate)
+                appointmentViewModel.fetchAvailableSlots(formattedDate)
             }
+            datePicker.show(parentFragmentManager, "DATE_PICKER")
         }
 
         binding.btnConfirmBooking.setOnClickListener {

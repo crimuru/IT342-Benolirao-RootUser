@@ -23,4 +23,10 @@ interface AdminApi {
         @Path("id") id: Long,
         @Body request: UpdateStatusRequest
     ): Response<Appointment>
+
+    @GET("slots/admin")
+    suspend fun getAdminSlots(@Query("date") date: String): Response<List<cit.edu.rootusermobile.features.appointment.data.AvailableSlot>>
+
+    @POST("slots/admin")
+    suspend fun createSlot(@Body slot: cit.edu.rootusermobile.features.appointment.data.AvailableSlot): Response<cit.edu.rootusermobile.features.appointment.data.AvailableSlot>
 }

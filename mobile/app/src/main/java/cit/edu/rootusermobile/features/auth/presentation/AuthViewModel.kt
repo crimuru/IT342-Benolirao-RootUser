@@ -54,4 +54,9 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
     fun resetState() {
         _authState.value = AuthState.Idle
     }
+
+    fun logout() {
+        currentUser = null
+        _authState.value = AuthState.Idle
+    }
 }

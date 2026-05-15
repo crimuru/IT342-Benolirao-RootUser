@@ -48,7 +48,7 @@ class PatientDashboardFragment : Fragment() {
             true
         }
 
-        binding.fabAddAppointment.setOnClickListener {
+        binding.btnBookAppointment.setOnClickListener {
             findNavController().navigate(R.id.action_patientDashboardFragment_to_bookingFragment)
         }
 

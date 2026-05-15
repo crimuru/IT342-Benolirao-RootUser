@@ -18,6 +18,7 @@
 
     <!-- Floating pill bottom nav container -->
     <LinearLayout
+        android:id="@+id/bottomNavContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
@@ -64,17 +65,30 @@
         <!-- Book Appointment -->
         <LinearLayout
             android:id="@+id/navBook"
-            android:layout_width="44dp"
+            android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:background="@android:color/transparent">
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:background="@android:color/transparent"
+            android:layout_marginEnd="4dp">
             <ImageView
                 android:id="@+id/iconBook"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:src="@android:drawable/ic_menu_agenda"
                 app:tint="#9E9E9E" />
+            <TextView
+                android:id="@+id/labelBook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book"
+                android:textColor="@color/primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginStart="6dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <!-- Spacer -->
@@ -83,17 +97,30 @@
         <!-- History -->
         <LinearLayout
             android:id="@+id/navHistory"
-            android:layout_width="44dp"
+            android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:background="@android:color/transparent">
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:background="@android:color/transparent"
+            android:layout_marginEnd="4dp">
             <ImageView
                 android:id="@+id/iconHistory"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:src="@android:drawable/ic_menu_recent_history"
                 app:tint="#9E9E9E" />
+            <TextView
+                android:id="@+id/labelHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="History"
+                android:textColor="@color/primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginStart="6dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <!-- Spacer -->
@@ -102,17 +129,194 @@
         <!-- Profile -->
         <LinearLayout
             android:id="@+id/navProfile"
-            android:layout_width="44dp"
+            android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:orientation="horizontal"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
             android:background="@android:color/transparent">
             <ImageView
                 android:id="@+id/iconProfile"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:src="@android:drawable/ic_menu_myplaces"
                 app:tint="#9E9E9E" />
+            <TextView
+                android:id="@+id/labelProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="@color/primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginStart="6dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Admin Bottom Nav Container -->
+    <LinearLayout
+        android:id="@+id/adminBottomNavContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_bottom_nav"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="10dp"
+        android:gravity="center_vertical"
+        android:elevation="12dp"
+        android:visibility="gone">
+
+        <!-- Overview -->
+        <LinearLayout
+            android:id="@+id/navAdminOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp"
+            android:background="@drawable/bg_nav_active_pill">
+            <ImageView
+                android:id="@+id/iconAdminOverview"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                app:tint="@color/primary" />
+            <TextView
+                android:id="@+id/labelAdminOverview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Overview"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <!-- Users -->
+        <LinearLayout
+            android:id="@+id/navAdminUsers"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp"
+            android:background="@android:color/transparent">
+            <ImageView
+                android:id="@+id/iconAdminUsers"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:tint="#9E9E9E" />
+            <TextView
+                android:id="@+id/labelAdminUsers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Users"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <!-- Appointments -->
+        <LinearLayout
+            android:id="@+id/navAdminAppointments"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp"
+            android:background="@android:color/transparent">
+            <ImageView
+                android:id="@+id/iconAdminAppointments"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_today"
+                app:tint="#9E9E9E" />
+            <TextView
+                android:id="@+id/labelAdminAppointments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appts"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <!-- Slots -->
+        <LinearLayout
+            android:id="@+id/navAdminSlots"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp"
+            android:background="@android:color/transparent">
+            <ImageView
+                android:id="@+id/iconAdminSlots"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_recent_history"
+                app:tint="#9E9E9E" />
+            <TextView
+                android:id="@+id/labelAdminSlots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slots"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp"
+                android:visibility="gone" />
+        </LinearLayout>
+        
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <!-- Logout -->
+        <LinearLayout
+            android:id="@+id/navAdminLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp"
+            android:background="@android:color/transparent">
+            <ImageView
+                android:id="@+id/iconAdminLogout"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:tint="#9E9E9E" />
+            <TextView
+                android:id="@+id/labelAdminLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp"
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>

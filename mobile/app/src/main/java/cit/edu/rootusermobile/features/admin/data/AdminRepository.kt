@@ -58,4 +58,30 @@ class AdminRepository(private val api: AdminApi) {
             Result.failure(e)
         }
     }
+
+    suspend fun getAdminSlots(date: String): Result<List<cit.edu.rootusermobile.features.appointment.data.AvailableSlot>> = withContext(Dispatchers.IO) {
+        try {
+            val response = api.getAdminSlots(date)
+            if (response.isSuccessful && response.body() != null) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(Exception("Failed to fetch slots"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun createSlot(slot: cit.edu.rootusermobile.features.appointment.data.AvailableSlot): Result<cit.edu.rootusermobile.features.appointment.data.AvailableSlot> = withContext(Dispatchers.IO) {
+        try {
+            val response = api.createSlot(slot)
+            if (response.isSuccessful && response.body() != null) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(Exception("Failed to create slot (may already exist)"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

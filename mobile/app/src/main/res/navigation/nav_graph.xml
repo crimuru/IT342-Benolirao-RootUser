@@ -76,4 +76,46 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="cit.edu.rootusermobile.features.appointment.presentation.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_patientDashboardFragment"
+            app:destination="@id/patientDashboardFragment"
+            app:popUpTo="@id/historyFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="cit.edu.rootusermobile.features.user.presentation.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/patientDashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminAppointmentsFragment"
+        android:name="cit.edu.rootusermobile.features.admin.presentation.AdminAppointmentsFragment"
+        android:label="Admin Appointments"
+        tools:layout="@layout/fragment_admin_appointments" />
+
+    <fragment
+        android:id="@+id/adminUsersFragment"
+        android:name="cit.edu.rootusermobile.features.admin.presentation.AdminUsersFragment"
+        android:label="Admin Users"
+        tools:layout="@layout/fragment_admin_users" />
+
+    <fragment
+        android:id="@+id/adminSlotsFragment"
+        android:name="cit.edu.rootusermobile.features.admin.presentation.AdminSlotsFragment"
+        android:label="Admin Slots"
+        tools:layout="@layout/fragment_admin_slots" />
+
 </navigation>

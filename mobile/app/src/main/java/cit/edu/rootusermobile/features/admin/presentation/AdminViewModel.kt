@@ -81,4 +81,37 @@ class AdminViewModel(private val repository: AdminRepository) : ViewModel() {
             }
         }
     }
+
+    private val _adminSlots = MutableStateFlow<List<cit.edu.rootusermobile.features.appointment.data.AvailableSlot>>(emptyList())
+    val adminSlots: StateFlow<List<cit.edu.rootusermobile.features.appointment.data.AvailableSlot>> = _adminSlots
+
+    fun fetchAdminSlots(date: String) {
+        viewModelScope.launch {
+            _uiState.value = AdminState.Loading
+            val result = repository.getAdminSlots(date)
+            result.onSuccess { data ->
+                _adminSlots.value = data
+                _uiState.value = AdminState.Idle
+            }.onFailure { error ->
+                _uiState.value = AdminState.Error(error.message ?: "Failed to fetch slots")
+            }
+        }
+    }
+
+    fun createSlot(date: String, time: String) {
+        viewModelScope.launch {
+            _uiState.value = AdminState.Loading
+            val slot = cit.edu.rootusermobile.features.appointment.data.AvailableSlot(
+                date = date,
+                time = time
+            )
+            val result = repository.createSlot(slot)
+            result.onSuccess {
+                fetchAdminSlots(date) // refresh list
+                _uiState.value = AdminState.Idle
+            }.onFailure { error ->
+                _uiState.value = AdminState.Error(error.message ?: "Failed to create slot")
+            }
+        }
+    }
 }

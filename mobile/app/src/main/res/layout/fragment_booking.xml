@@ -107,7 +107,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="YYYY-MM-DD"
-                                android:inputType="date"
+                                android:inputType="none"
+                                android:focusable="false"
+                                android:cursorVisible="false"
                                 android:textSize="13sp"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,11 +158,13 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="?attr/textInputStyle">
-                            <androidx.appcompat.widget.AppCompatSpinner
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                            <AutoCompleteTextView
                                 android:id="@+id/spinnerConsultation"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:hint="Select Type"
                                 android:textSize="13sp"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
