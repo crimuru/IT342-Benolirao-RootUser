@@ -17,9 +17,8 @@
         android:padding="16dp"
         android:gravity="center_vertical">
 
-        <!-- Date Badge (matches web: month + day stacked) -->
+        <!-- Date Badge (month + day, matching web history-date) -->
         <LinearLayout
-            android:id="@+id/llDateBadge"
             android:layout_width="52dp"
             android:layout_height="60dp"
             android:orientation="vertical"
@@ -47,7 +46,7 @@
                 android:textStyle="bold"/>
         </LinearLayout>
 
-        <!-- Concern + Time -->
+        <!-- Concern + Time + Status badge -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,7 +57,7 @@
                 android:id="@+id/tvConcern"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No concern provided"
+                android:text="General Consultation"
                 android:textSize="15sp"
                 android:textColor="@color/text_main"
                 android:textStyle="bold"
@@ -73,40 +72,21 @@
                 android:textSize="13sp"
                 android:textColor="@color/text_muted"
                 android:layout_marginTop="3dp"/>
-        </LinearLayout>
 
-        <!-- Status Badge + Cancel Button (mirrors web item-right) -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
+            <!-- Status badge inline, matching web's .status-badge -->
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pending"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="6dp"
+                android:text="completed"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
                 android:textSize="11sp"
-                android:background="@drawable/bg_status_badge_pending"
-                android:textColor="#B45309"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_status_badge_confirmed"
+                android:textColor="@color/success"/>
 
-            <!-- Cancel icon — hidden for cancelled appointments via code -->
-            <ImageView
-                android:id="@+id/btnCancel"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                app:tint="@color/danger"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="4dp"
-                android:layout_marginStart="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:contentDescription="Cancel appointment"/>
         </LinearLayout>
 
     </LinearLayout>
