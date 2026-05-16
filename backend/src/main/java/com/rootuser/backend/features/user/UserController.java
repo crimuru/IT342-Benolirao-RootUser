@@ -19,4 +19,19 @@ public class UserController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    // Update user details for the Profile Page
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUserProfile(@PathVariable Long id, @RequestBody User updatedUser) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setFirstName(updatedUser.getFirstName());
+                    user.setLastName(updatedUser.getLastName());
+                    user.setEmail(updatedUser.getEmail());
+                    user.setPhone(updatedUser.getPhone());
+                    // NOTE: We don't update password or role here for security reasons.
+                    return ResponseEntity.ok(userRepository.save(user));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

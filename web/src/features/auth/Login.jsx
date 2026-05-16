@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import googleIcon from '../../assets/google_ic.png';
 import '../../styles/Register.css';
 
 const Login = () => {
@@ -61,7 +62,7 @@ const Login = () => {
 
         <button type="button" onClick={handleGoogleLogin} className="btn-google">
           <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" 
+            src={googleIcon} 
             alt="Google logo" 
             className="google-icon" 
           />
