@@ -3,6 +3,7 @@ import { User, Mail, Phone, Save, CheckCircle2, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../dashboard/Sidebar';
 import '../../styles/Profile.css';
+import API_BASE_URL from '../../config';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Profile = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/users/${loggedInUser.id}`);
+        const response = await fetch(`${API_BASE_URL}/api/users/${loggedInUser.id}`);
         if (response.ok) {
           const data = await response.json();
           setProfileData(data);
@@ -69,7 +70,7 @@ const Profile = () => {
     const loggedInUser = JSON.parse(userString);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/users/${loggedInUser.id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/${loggedInUser.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profileData),

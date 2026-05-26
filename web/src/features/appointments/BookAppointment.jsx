@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, Clock, FileText, CheckCircle2, Loader2 } from 'lucide-react';
 import Sidebar from '../dashboard/Sidebar';
 import '../../styles/BookAppointment.css';
+import API_BASE_URL from '../../config';
 
 const BookAppointment = () => {
   const [bookingData, setBookingData] = useState({
@@ -29,7 +30,7 @@ const BookAppointment = () => {
   React.useEffect(() => {
     if (bookingData.date) {
       setLoadingSlots(true);
-      fetch(`http://localhost:8080/api/slots/available?date=${bookingData.date}`)
+      fetch(`${API_BASE_URL}/api/slots/available?date=${bookingData.date}`)
         .then(res => res.json())
         .then(data => {
             data.sort((a, b) => a.time.localeCompare(b.time));
@@ -84,7 +85,7 @@ const BookAppointment = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/appointments", {
+      const response = await fetch(`${API_BASE_URL}/api/appointments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

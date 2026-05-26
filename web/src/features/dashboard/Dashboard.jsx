@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar';
 import StatusBadge from '../../components/ui/StatusBadge';
 import '../../styles/Dashboard.css';
+import API_BASE_URL from '../../config';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       // 🚀 REFACTORED: One clean API call to the Facade endpoint
-      const response = await fetch(`http://localhost:8080/api/dashboard/${user.id}`);
+      const response = await fetch(`${API_BASE_URL}/api/dashboard/${user.id}`);
       if (response.ok) {
         const data = await response.json();
         // The backend did all the math, we just save it directly to state!
@@ -93,7 +94,7 @@ const Dashboard = () => {
 
   const confirmCancel = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/appointments/${selectedId}/cancel`, {
+      const response = await fetch(`${API_BASE_URL}/api/appointments/${selectedId}/cancel`, {
         method: "PUT",
       });
 

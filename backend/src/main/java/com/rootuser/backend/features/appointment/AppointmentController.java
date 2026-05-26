@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/appointments")
 // 🚀 UPDATED: Detailed CORS configuration to stop the "Preflight" errors
 @CrossOrigin(
-    origins = {"http://localhost:3000", "http://localhost:5173"},
+    origins = {"http://localhost:3000", "http://localhost:5173", "https://rootuser-web-zt2i.onrender.com"},
     allowedHeaders = "*",
     methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS}
 )

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/dashboard")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"}) // Allows React to talk to Spring Boot
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173", "https://rootuser-web-zt2i.onrender.com"}) // Allows React to talk to Spring Boot
 public class DashboardController {
 
     @Autowired

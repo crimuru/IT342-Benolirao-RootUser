@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Plus, Trash2 } from "lucide-react";
 import AdminSidebar from './AdminSidebar';
 import '../../styles/Admin.css'; 
+import API_BASE_URL from '../../config';
 
 const AdminSlots = () => {
   const [date, setDate] = useState("");
@@ -22,7 +23,7 @@ const AdminSlots = () => {
   const fetchSlots = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/slots/admin?date=${date}`);
+      const res = await fetch(`${API_BASE_URL}/api/slots/admin?date=${date}`);
       if (res.ok) {
         const data = await res.json();
         // Sort chronologically
@@ -41,7 +42,7 @@ const AdminSlots = () => {
     if (!date || !time) return;
 
     try {
-      const res = await fetch("http://localhost:8080/api/slots/admin", {
+      const res = await fetch(`${API_BASE_URL}/api/slots/admin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ date, time })
@@ -63,7 +64,7 @@ const AdminSlots = () => {
     }
     
     try {
-      const res = await fetch(`http://localhost:8080/api/slots/admin/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/slots/admin/${id}`, {
         method: "DELETE"
       });
       if (res.ok) {

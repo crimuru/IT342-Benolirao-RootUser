@@ -4,6 +4,7 @@ import { CheckCircle, XCircle } from "lucide-react";
 import AdminSidebar from './AdminSidebar';
 import StatusBadge from '../../components/ui/StatusBadge';
 import '../../styles/Admin.css';
+import API_BASE_URL from '../../config';
 
 const AdminAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -16,7 +17,7 @@ const AdminAppointments = () => {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/admin/appointments");
+      const response = await fetch(`${API_BASE_URL}/api/admin/appointments`);
       if (response.ok) {
         const data = await response.json();
         setAppointments(data);
@@ -30,7 +31,7 @@ const AdminAppointments = () => {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/appointments/${id}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/admin/appointments/${id}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus })
