@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/Register.css';
+import API_BASE_URL from '../../config';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     try {
       // Corrected URL path to match AuthController mapping
-      const response = await axios.post('http://localhost:8080/api/auth/register', formData);
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
       
       if (response.status === 201 || response.status === 200) {
         alert("Registration Successful!");

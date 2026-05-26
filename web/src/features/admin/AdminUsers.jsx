@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
 import AdminSidebar from './AdminSidebar';
 import '../../styles/Admin.css';
+import API_BASE_URL from '../../config';
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -14,7 +15,7 @@ const AdminUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/admin/users");
+      const response = await fetch(`${API_BASE_URL}/api/admin/users`);
       if (response.ok) {
         const data = await response.json();
         setUsers(data);
@@ -30,7 +31,7 @@ const AdminUsers = () => {
     if (!window.confirm("Are you sure you want to delete this user? All their appointments will be removed.")) return;
     
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/admin/users/${id}`, {
         method: "DELETE"
       });
       if (response.ok) {

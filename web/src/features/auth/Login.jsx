@@ -1,9 +1,9 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import googleIcon from '../../assets/google_ic.png';
 import '../../styles/Register.css';
+import API_BASE_URL from '../../config';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Login = () => {
  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', loginData);
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, loginData);
       
       if (response.status === 200) {
         const loggedInUser = {
@@ -43,7 +43,7 @@ const Login = () => {
 
   // 🚀 NEW: Function to trigger Google OAuth2
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = `${API_BASE_URL}/oauth2/authorization/google`;
   };
 
   return (

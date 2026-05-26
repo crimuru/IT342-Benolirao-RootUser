@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Clock, CheckCircle2, XCircle } from 'lucide-react';
 import Sidebar from '../dashboard/Sidebar';
 import '../../styles/AppointmentHistory.css';
+import API_BASE_URL from '../../config';
 
 const AppointmentHistory = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const AppointmentHistory = () => {
 
     const fetchHistory = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/appointments/user/${loggedInUser.id}`);
+        const response = await fetch(`${API_BASE_URL}/api/appointments/user/${loggedInUser.id}`);
         if (response.ok) {
           const data = await response.json();
           setAppointments(data);

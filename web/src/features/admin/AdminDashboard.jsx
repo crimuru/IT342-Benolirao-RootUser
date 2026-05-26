@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Users, CalendarDays, AlertCircle } from "lucide-react";
 import AdminSidebar from './AdminSidebar';
 import '../../styles/Admin.css';
+import API_BASE_URL from '../../config';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -19,7 +20,7 @@ const AdminDashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/admin/dashboard-stats");
+      const response = await fetch(`${API_BASE_URL}/api/admin/dashboard-stats`);
       if (response.ok) {
         const data = await response.json();
         setStats(data);
