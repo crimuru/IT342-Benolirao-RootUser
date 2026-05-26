@@ -55,7 +55,9 @@ public class SecurityConfig {
                     .userService(customOAuth2UserService)
                 )
                 .successHandler(oAuth2LoginSuccessHandler)
-                .authorizationRequestResolver(authorizationRequestResolver(clientRegistrationRepository))
+                .authorizationEndpoint(authorization -> authorization
+                    .authorizationRequestResolver(authorizationRequestResolver(clientRegistrationRepository))
+                )
             );
             
         return http.build();
